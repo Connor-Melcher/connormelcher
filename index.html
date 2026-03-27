@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="assets/favicon.ico">
   <title>Connor Melcher</title>
+  <meta name="description" content="Connor Melcher – ISyE @ Georgia Tech. Supply chain, AI strategy, and operations.">
+  <meta property="og:title" content="Connor Melcher">
+  <meta property="og:description" content="Incoming Microsoft Intern · Amazon · Tesla · ISyE @ Georgia Tech '27">
+  <meta property="og:image" content="assets/headshot.png">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&dislay=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     /* ── THEME TOKENS ── */
     :root, [data-theme="dark"] {
@@ -98,6 +103,19 @@
     }
     .nav-links a:hover { color: var(--text); }
 
+    .nav-resume {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.3rem 0.75rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-resume:hover { color: var(--text); border-color: var(--text-sub); }
+
     .contrast-btn {
       background: none;
       border: 1px solid var(--border);
@@ -113,6 +131,22 @@
       flex-shrink: 0;
     }
     .contrast-btn:hover { color: var(--text); border-color: var(--text-sub); }
+
+    .hamburger-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      cursor: pointer;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .hamburger-btn:hover { color: var(--text); border-color: var(--text-sub); }
 
     /* ── HERO ── */
     #hero {
@@ -281,8 +315,10 @@
     .company-logo:hover { opacity: var(--logo-hover); }
 
     .nasa-logo {
+      /* filter: var(--logo-filter);
+      opacity: var(--logo-op); */
       filter: grayscale(1) brightness(0.8) contrast(1.2);
-      opacity: 0.7 !important;
+      opacity: 0.7 !important
     }
 
     /* ── SECTION SHARED ── */
@@ -340,7 +376,6 @@
       flex-direction: column;
       gap: 1.75rem;
     }
-
 
     .info-label {
       font-size: 0.65rem;
@@ -509,6 +544,7 @@
       text-decoration: none;
       transition: color 0.2s;
       padding: 0.1rem 0.3rem;
+      cursor: pointer;
     }
     .proj-arrow:hover { color: var(--text); }
 
@@ -523,14 +559,14 @@
     .proj-entry.open .proj-title { opacity: 0.7; }
 
     .proj-date {
-      display: block;
+      display: none;
       padding: 0.25rem 0 0 3.5rem;
       font-size: 0.72rem;
       color: var(--text-dim);
     }
     .proj-entry.open .proj-date { display: block; }
 
-    /* ── SKILLS ── */
+    /* ── CAPABILITIES ── */
     #skills { background: var(--bg-alt); }
 
     .skills-grid {
@@ -544,7 +580,7 @@
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: var(--text-sub);
-      margin-bottom: 0.75rem
+      margin-bottom: 0.75rem;
       font-weight: 600;
     }
 
@@ -653,7 +689,21 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        gap: 1rem;
+      }
+      .nav-resume { display: none; }
+      .hamburger-btn { display: flex; }
 
       #hero { padding: 7rem 1.5rem 4rem; }
       .hero-inner { flex-direction: column-reverse; gap: 2.5rem; }
@@ -686,9 +736,11 @@
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
+        <li><a href="#skills">Capabilities</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <a href="assets/resume.pdf" target="_blank" class="nav-resume">Resume ↗</a>
+      <button class="hamburger-btn" id="hamburger-btn" title="Menu" aria-label="Toggle menu">☰</button>
       <button class="contrast-btn" id="contrast-btn" title="Toggle contrast" aria-label="Toggle light/dark mode">◐</button>
     </div>
   </nav>
@@ -699,7 +751,7 @@
       <div class="hero-text">
         <div class="hero-avail">
           <span class="hero-avail-dot"></span>
-          Open to Opportunities
+          Incoming @ Microsoft · Summer 2026
         </div>
         <h1 class="hero-name">Connor<br>Melcher</h1>
         <div class="hero-rule"></div>
@@ -707,8 +759,9 @@
         <p class="hero-sub-mono" id="typewriter">&gt; <span id="tw-text"></span><span class="cursor"></span></p>
         <div class="hero-ctas">
           <a href="#projects" class="cta-primary">View My Work ↓</a>
-          <a href="https://www.linkedin.com/in/connor-melcher-2390b1217/" target="_blank" class="cta-secondary">LinkedIn ↗</a>
-          <a href="mailto:melcherconnor@gmail.com" class="cta-secondary">Email ↗</a>
+          <a href="assets/resume.pdf" target="_blank" class="cta-secondary">Resume ↗</a>
+          <a href="https://linkedin.com/in/connor-melcher" target="_blank" class="cta-secondary">LinkedIn ↗</a>
+          <a href="mailto:cmelcher30@gatech.edu" class="cta-secondary">Email ↗</a>
         </div>
       </div>
       <div class="hero-photo">
@@ -725,7 +778,7 @@
         <img src="assets/microsoft.svg"       alt="Microsoft"       class="company-logo" />
         <img src="assets/amazon-robotics.svg" alt="Amazon Robotics" class="company-logo" />
         <img src="assets/tesla.png"           alt="Tesla"           class="company-logo" />
-        <img src="assets/nasa.svg"        alt="NASA"            class="company-logo nasa-logo" />
+        <img src="assets/nasa.svg"            alt="NASA"            class="company-logo nasa-logo" />
       </div>
     </div>
   </section>
@@ -741,19 +794,24 @@
       <div class="about-grid">
         <div class="about-text">
           <p>
-            I'm an Industrial and Systems Engineering student at Georgia Tech concentrating in
-            Data Analytics &amp; Science. I sit at the intersection of systems thinking and
-            data-driven decision making — turning complex operational data into tangible impact.
+            I'm an Industrial and Systems Engineering student at Georgia Tech, with hands-on
+            experience applying structured problem-solving and quantitative analysis to complex
+            operational and strategic challenges at Amazon and Tesla.
           </p>
           <p>
-            My work spans AI agent development, supply chain optimization, financial modeling,
-            and machine learning. I've built production systems at Amazon and Tesla that eliminated
-            hundreds of analyst hours annually and modeled billions of dollars in operational spend.
+            At Amazon Robotics, I led network design strategy, deployed AI agent systems, and built
+            optimization models analyzing <strong style="color:var(--text)">$2.8B+ in global operational spend</strong>,
+            surfacing $85M+ in annual savings and briefing executive leadership on strategic
+            trade-offs across supply chain, finance, and manufacturing. At Tesla, I drove data
+            analysis across 10M+ SKU-level transactions to improve service parts performance
+            and support FP&amp;A decisions.
           </p>
           <p>
-            I'm a Zell Miller Scholar, founding resident of GT Hacker House, and Project Officer
-            in GT's Supply Chain &amp; Logistics Organization. Outside of work: I'm usually
-            on a golf course, training for a triathlon, or trying to learn something new!
+            I bring a consulting mindset to every engagement: start with structure, drive to
+            insight, and translate complexity into action for decision-makers. I'm a Zell Miller
+            Scholar, Project Officer &amp; Mentor in GT's Supply Chain &amp; Logistics Organization,
+            and founding resident of GT Hacker House. Outside of work: I'm usually on a golf
+            course, training for a triathlon, or trying to learn something new!
           </p>
         </div>
         <div class="about-aside">
@@ -775,7 +833,7 @@
           </div>
           <div class="info-block fade">
             <div class="info-label">Location</div>
-            <div class="info-value">Augusta, GA</div>
+            <div class="info-value">Atlanta, GA</div>
             <div class="info-sub">Open to relocation</div>
           </div>
         </div>
@@ -801,7 +859,7 @@
               <div class="exp-date">Summer 2026</div>
             </div>
             <div class="exp-company">Microsoft · Redmond, WA</div>
-            <div class="exp-dept">Cloud Supply Chain (CSCP)</div>
+            <div class="exp-dept">Cloud Supply Chain (CSCP) · Azure Cloud & AI Infrastructure</div>
             <span class="exp-incoming-badge">↑ Incoming</span>
           </div>
         </div>
@@ -814,14 +872,14 @@
               <div class="exp-date">Jul – Dec 2025</div>
             </div>
             <div class="exp-company">Amazon · Boston, MA</div>
-            <div class="exp-dept">Fulfillment Technologies &amp; Robotics</div>
+            <div class="exp-dept">Fulfillment Technologies &amp; Robotics — Network Design Strategy</div>
             <ul class="exp-bullets">
-              <li>Designed and deployed 4 production AI agents integrating enterprise knowledge bases, eliminating <strong>hundreds of analyst hours</strong> annually through automated knowledge capture, reporting, and decision-support workflows.</li>
-              <li>Led enterprise AI enablement for <strong>40+ stakeholders</strong> across supply chain, finance, and PM; translated complex AI capabilities into executive briefings.</li>
-              <li>Developed a network optimization dashboard analyzing <strong>$XB+</strong> in global operational spend, identifying <strong>$XXM+</strong> in annual savings via total landed cost modeling.</li>
-              <li>Automated data collection pipelines using AWS Geocode API, reducing manual data prep by <strong>~99%</strong> and improving model governance at scale.</li>
-              <li>Built 2 SQL + Tableau dashboards covering <strong>tens of thousands of transportation lines</strong>, enabling automated capacity planning and real-time executive reporting.</li>
-              <li>Supported financial modeling for a <strong>$XXM+ capacity planning portfolio</strong>, informing capital allocation for supply chain, manufacturing, and finance leadership.</li>
+              <li>Designed and deployed <strong>4 production AI agents</strong> integrating enterprise knowledge bases, eliminating <strong>350+ analyst hours annually</strong> through automated knowledge capture, reporting, and decision-support workflows.</li>
+              <li>Led enterprise AI enablement program for <strong>40+ stakeholders</strong> across supply chain, finance, and PM; translated complex AI capabilities into executive briefings and advised on agent implementation strategy.</li>
+              <li>Developed a network optimization dashboard analyzing <strong>$2.8B+ in global operational spend</strong>, identifying <strong>$85M+</strong> in annual savings via total landed cost modeling.</li>
+              <li>Automated data collection pipelines using AWS Geocode API, reducing manual data prep by <strong>~99%</strong> and improving model governance and reproducibility at scale.</li>
+              <li>Built 2 SQL + Tableau dashboards covering <strong>45,000+ transportation lines</strong>, enabling automated capacity planning and real-time executive reporting.</li>
+              <li>Supported sensitivity analyses and financial modeling for a <strong>$50M+ capacity planning portfolio</strong>, informing capital allocation trade-offs for supply chain, manufacturing, and finance leadership.</li>
             </ul>
           </div>
         </div>
@@ -836,9 +894,9 @@
             <div class="exp-company">Tesla · Atlanta, GA</div>
             <div class="exp-dept">Service Parts Operations</div>
             <ul class="exp-bullets">
-              <li>Built a SQL pipeline consolidating <strong>10M+ SKU-level transactions</strong> to identify part consumption patterns regionally, informing inventory decisions to reduce lead times.</li>
+              <li>Built a SQL pipeline consolidating <strong>10M+ SKU-level transactions</strong> to identify regional part consumption patterns, informing inventory decisions to reduce lead times and improve service throughput.</li>
               <li>Designed a Tableau dashboard with center-by-center aggregation, optimizing pipeline load time by <strong>40%</strong> and accelerating executive reporting cycles.</li>
-              <li>Modeled HV battery order anomalies across <strong>20+ service centers</strong>, isolating delays and system inaccuracies to flag supply risks and support FP&amp;A cost allocation.</li>
+              <li>Modeled HV battery order anomalies across <strong>20+ service centers</strong>, isolating delays and system inaccuracies to flag supply risks and support FP&amp;A cost allocation decisions.</li>
             </ul>
           </div>
         </div>
@@ -851,7 +909,7 @@
   <section id="projects">
     <div class="section-wrap">
       <div class="sec-header">
-        <div class="sec-label">// projects</div>
+        <div class="sec-label">// projects &amp; research</div>
         <h2 class="sec-title">What I've Built</h2>
         <hr class="sec-rule" />
       </div>
@@ -860,31 +918,32 @@
         <div class="proj-entry fade" onclick="toggleProject(this)">
           <div class="proj-top">
             <span class="proj-num">01</span>
-            <span class="proj-title">Financial Statement Forecasting</span>
+            <span class="proj-title">Corporate Financial Statement &amp; Forecasting Analysis</span>
             <span class="proj-tags-inline">Python · SQL · Tableau · ETL</span>
-            <a href="#" class="proj-arrow" onclick="event.stopPropagation()" title="GitHub">↗</a>
+            <span class="proj-arrow">▶</span>
           </div>
           <span class="proj-date">Aug 2024 – Dec 2025 · Personal Project</span>
           <div class="proj-desc">
             Automated SEC 10-K ingestion &amp; ratio analysis with a Python ETL pipeline,
-            cutting data collection time by ~97% per filing (saving 80+ analyst hours per 200
-            filings). Built a SQL + Tableau dashboard to forecast performance and benchmark
-            YoY growth.
+            cutting data collection time by ~97% per filing saving 80+ analyst hours per
+            200 filings. Built a SQL + Tableau dashboard to forecast performance, benchmark
+            YoY growth, and support expenditure planning.
           </div>
         </div>
 
         <div class="proj-entry fade" onclick="toggleProject(this)">
           <div class="proj-top">
             <span class="proj-num">02</span>
-            <span class="proj-title">Data 4 Good Case Competition</span>
-            <span class="proj-tags-inline">Python · ML · Azure AI</span>
-            <a href="#" class="proj-arrow" onclick="event.stopPropagation()" title="GitHub">↗</a>
+            <span class="proj-title">Data 4 Good National Case Competition</span>
+            <span class="proj-tags-inline">Python · ML · Azure AI · Strategy</span>
+            <span class="proj-arrow">▶</span>
           </div>
-          <span class="proj-date">Aug – Nov 2024 · $40K National Competition</span>
+          <span class="proj-date">Aug – Nov 2024 · $40K National Competition · Team Lead</span>
           <div class="proj-desc">
             Led a four-member team in a national $40K social-impact analytics competition.
-            Applied AI &amp; ML model tuning to drive meaningful outcomes. Earned
-            Microsoft Azure AI-900 certification during the engagement.
+            Applied AI &amp; ML model tuning to drive meaningful outcomes for a real-world
+            client challenge. Earned Microsoft Azure AI Fundamentals (AI-900) certification
+            during the engagement.
           </div>
         </div>
 
@@ -892,15 +951,30 @@
           <div class="proj-top">
             <span class="proj-num">03</span>
             <span class="proj-title">NASA Rover Thermal Research (MARS Lab)</span>
-            <span class="proj-tags-inline">Thermal Modeling · PCMs · Research</span>
-            <a href="#" class="proj-arrow" onclick="event.stopPropagation()" title="Research">↗</a>
+            <span class="proj-tags-inline">Thermal Modeling · PCMs · NASA</span>
+            <span class="proj-arrow">▶</span>
           </div>
-          <span class="proj-date">Aug – Dec 2024 · Undergrad Researcher</span>
+          <span class="proj-date">Aug – Dec 2024 · Undergrad Researcher · Georgia Tech VIP</span>
           <div class="proj-desc">
             Researched thermal conductivity enhancement of phase change materials (PCMs)
-            for NASA Martian rover applications. Demonstrated a <strong>61% improvement</strong> in heat
-            transfer response over baseline and produced design recommendations for future
-            rover thermal management systems.
+            for NASA Martian rover applications in the M.A.R.S. Lab. Demonstrated a
+            61% improvement in heat transfer response over baseline and produced design
+            recommendations for future rover thermal management systems.
+          </div>
+        </div>
+
+        <div class="proj-entry fade" onclick="toggleProject(this)">
+          <div class="proj-top">
+            <span class="proj-num">04</span>
+            <span class="proj-title">Bio-Inspired Drone Flight Simulation</span>
+            <span class="proj-tags-inline">Simulation · Dynamics · Robotics</span>
+            <span class="proj-arrow">▶</span>
+          </div>
+          <span class="proj-date">Jan 2023 – Aug 2024 · Undergrad Researcher · Georgia Tech VIP</span>
+          <div class="proj-desc">
+            Simulated moth flight dynamics in Georgia Tech's Living Dynamical Systems Lab to
+            inform bio-inspired drone development. Contributed to a two-year research effort
+            modeling adaptive flight behaviors for application in autonomous aerial systems.
           </div>
         </div>
 
@@ -908,72 +982,74 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- CAPABILITIES -->
   <section id="skills">
     <div class="section-wrap">
       <div class="sec-header">
-        <div class="sec-label">// skills</div>
-        <h2 class="sec-title">Tech Stack</h2>
+        <div class="sec-label">// capabilities</div>
+        <h2 class="sec-title">Areas of Expertise</h2>
         <hr class="sec-rule" />
       </div>
       <div class="skills-grid">
         <div class="fade">
-          <div class="skill-group-label">Languages</div>
+          <div class="skill-group-label">Problem Solving &amp; Frameworks</div>
           <div class="skill-list">
-            <span class="skill-badge">Python</span>
-            <span class="skill-badge">R</span>
-            <span class="skill-badge">SQL</span>
-            <span class="skill-badge">Java</span>
+            <span class="skill-badge">Hypothesis-Driven Analysis</span>
+            <span class="skill-badge">MECE Structuring</span>
+            <span class="skill-badge">Issue Trees</span>
+            <span class="skill-badge">Root Cause Analysis</span>
+            <span class="skill-badge">Scenario Planning</span>
           </div>
         </div>
         <div class="fade">
-          <div class="skill-group-label">Data &amp; Visualization</div>
+          <div class="skill-group-label">Financial &amp; Business Analysis</div>
           <div class="skill-list">
-            <span class="skill-badge">Tableau</span>
-            <span class="skill-badge">Power BI</span>
-            <span class="skill-badge">Excel (Advanced)</span>
-            <span class="skill-badge">Matplotlib</span>
-            <span class="skill-badge">Seaborn</span>
+            <span class="skill-badge">Financial Modeling</span>
+            <span class="skill-badge">Sensitivity Analysis</span>
+            <span class="skill-badge">Total Landed Cost</span>
+            <span class="skill-badge">Capital Allocation</span>
+            <span class="skill-badge">FP&amp;A</span>
           </div>
         </div>
         <div class="fade">
-          <div class="skill-group-label">Machine Learning &amp; AI</div>
+          <div class="skill-group-label">Operations &amp; Supply Chain</div>
           <div class="skill-list">
-            <span class="skill-badge">PyTorch</span>
-            <span class="skill-badge">TensorFlow</span>
-            <span class="skill-badge">scikit-learn</span>
+            <span class="skill-badge">Network Design</span>
+            <span class="skill-badge">Logistics Strategy</span>
+            <span class="skill-badge">Inventory Optimization</span>
+            <span class="skill-badge">Process Improvement</span>
+            <span class="skill-badge">Lean / Six Sigma</span>
+          </div>
+        </div>
+        <div class="fade">
+          <div class="skill-group-label">AI Strategy &amp; Automation</div>
+          <div class="skill-list">
             <span class="skill-badge">AI Agent Development</span>
+            <span class="skill-badge">Enterprise AI Enablement</span>
+            <span class="skill-badge">ETL Pipelines</span>
+            <span class="skill-badge">Machine Learning</span>
             <span class="skill-badge">Azure AI (AI-900)</span>
           </div>
         </div>
         <div class="fade">
-          <div class="skill-group-label">Engineering &amp; Optimization</div>
+          <div class="skill-group-label">Data &amp; Analytics</div>
           <div class="skill-list">
-            <span class="skill-badge">Linear Programming</span>
-            <span class="skill-badge">Simulation</span>
-            <span class="skill-badge">Supply Chain</span>
-            <span class="skill-badge">Six Sigma</span>
-            <span class="skill-badge">Lean</span>
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">SQL</span>
+            <span class="skill-badge">Tableau</span>
+            <span class="skill-badge">Power BI</span>
+            <span class="skill-badge">Excel (Advanced)</span>
+            <span class="skill-badge">R</span>
           </div>
         </div>
         <div class="fade">
-          <div class="skill-group-label">Data Engineering</div>
+          <div class="skill-group-label">Communication &amp; Leadership</div>
           <div class="skill-list">
-            <span class="skill-badge">ETL Pipelines</span>
-            <span class="skill-badge">PostgreSQL</span>
-            <span class="skill-badge">AWS</span>
-            <span class="skill-badge">Pandas</span>
-            <span class="skill-badge">NumPy</span>
-          </div>
-        </div>
-        <div class="fade">
-          <div class="skill-group-label">Enterprise &amp; Tools</div>
-          <div class="skill-list">
-            <span class="skill-badge">Oracle ERP</span>
-            <span class="skill-badge">SAP</span>
-            <span class="skill-badge">Databricks</span>
-            <span class="skill-badge">Jupyter</span>
-            <span class="skill-badge">Git</span>
+            <span class="skill-badge">Executive Briefings</span>
+            <span class="skill-badge">Stakeholder Management</span>
+            <span class="skill-badge">Cross-Functional Teams</span>
+            <span class="skill-badge">Mentorship</span>
+            <span class="skill-badge">Public Policy</span>
           </div>
         </div>
       </div>
@@ -985,20 +1061,22 @@
     <div class="section-wrap">
       <div class="sec-header">
         <div class="sec-label">// contact</div>
+        <h2 class="sec-title">Get In Touch</h2>
         <hr class="sec-rule" />
       </div>
       <div class="contact-center">
-        <h2 class="contact-headline">Let's work together.</h2>
+        <!-- <h2 class="contact-headline">Let's work together.</h2> -->
         <p class="contact-copy">
-          I'm looking for internships, co-ops, and research opportunities in data science,
-          supply chain analytics, and AI. If you're working on something interesting or
-          just want to connect — reach out.
+          I'm excited about applying structured problem-solving to high-stakes business 
+          challenges at the intersection of strategy, operations, and technology. 
+          If you're working on something interesting or just want to connect, reach out!
         </p>
         <a href="mailto:cmelcher30@gatech.edu" class="contact-email">
           cmelcher30@gatech.edu ↗
         </a>
         <div class="contact-socials">
-          <a href="https://www.linkedin.com/in/connor-melcher-2390b1217/" target="_blank" class="social-link">LinkedIn ↗</a>
+          <a href="https://linkedin.com/in/connor-melcher" target="_blank" class="social-link">LinkedIn ↗</a>
+          <a href="assets/resume.pdf" target="_blank" class="social-link">Resume ↗</a>
           <a href="tel:7193770083" class="social-link">(719) 377-0083</a>
         </div>
       </div>
@@ -1007,7 +1085,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2026 Connor Melcher · Augusta, GA</span>
+    <span>© 2026 Connor Melcher · Atlanta, GA</span>
     <span class="footer-mono">&lt;/built with intention&gt;</span>
   </footer>
 
@@ -1032,10 +1110,12 @@
 
     // ── Typewriter ──
     const phrases = [
-      'Data Analytics & Science.',
-      'Supply Chain + AI Strategy.',
-      'Building systems that scale.',
       'ISyE @ Georgia Tech · Dec 2027',
+      'AI Strategy & Enterprise Transformation.',
+      'Supply Chain Network Design.',
+      'Logistics & Operations Strategy.',
+      'AI Agent Design & Deployment.',
+      'Financial Modeling & Analysis.',
     ];
     let pIdx = 0, cIdx = 0, deleting = false;
     const twEl = document.getElementById('tw-text');
@@ -1070,7 +1150,20 @@
     // ── Project expand ──
     function toggleProject(el) {
       el.classList.toggle('open');
+      const arrow = el.querySelector('.proj-arrow');
+      const isOpen = el.classList.contains('open');
+      arrow.textContent = isOpen ? '▼' : '▶';
     }
+
+    // ── Mobile hamburger menu ──
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const navResume = document.querySelector('.nav-resume');
+
+    hamburgerBtn.addEventListener('click', () => {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      navResume.style.display = navResume.style.display === 'inline-flex' ? 'none' : 'inline-flex';
+    });
   </script>
 </body>
 </html>
